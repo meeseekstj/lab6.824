@@ -10,21 +10,21 @@ package main
 // Please do not change this file.
 //
 
-import "6.824/mr"
+import "a6.824/mr"
 import "plugin"
 import "os"
 import "fmt"
 import "log"
 
 func main() {
-	if len(os.Args) != 2 {
-		fmt.Fprintf(os.Stderr, "Usage: mrworker xxx.so\n")
+	if len(os.Args) < 2 {
+		fmt.Fprintf(os.Stderr, "Usage: mrworker xxx.so workId\n")
 		os.Exit(1)
 	}
 
 	mapf, reducef := loadPlugin(os.Args[1])
 
-	mr.Worker(mapf, reducef)
+	mr.Worker(mapf, reducef, "default")
 }
 
 //
@@ -32,6 +32,7 @@ func main() {
 // from a plugin file, e.g. ../mrapps/wc.so
 //
 func loadPlugin(filename string) (func(string, string) []mr.KeyValue, func(string, []string) string) {
+	//fmt.Println(os.Getwd())
 	p, err := plugin.Open(filename)
 	if err != nil {
 		log.Fatalf("cannot load plugin %v", filename)

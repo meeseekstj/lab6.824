@@ -281,6 +281,10 @@ sleep 1
 
 # start multiple workers
 $TIMEOUT ../mrworker ../../mrapps/crash.so &
+$TIMEOUT ../mrworker ../../mrapps/crash.so &
+$TIMEOUT ../mrworker ../../mrapps/crash.so &
+$TIMEOUT ../mrworker ../../mrapps/crash.so &
+$TIMEOUT ../mrworker ../../mrapps/crash.so &
 
 # mimic rpc.go's coordinatorSock()
 SOCKNAME=/var/tmp/824-mr-`id -u`
